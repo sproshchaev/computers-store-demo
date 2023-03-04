@@ -51,19 +51,31 @@ public class LaptopServiceImpl implements LaptopService {
         for (Map.Entry map : criteria.entrySet()) {
             switch ((int) map.getKey()) {
                 case 1:
-                    for (Laptop laptop : laptopSet) {
-                        if (laptop.getRam() >= Integer.parseInt((String) map.getValue())) {
-                            resultSet.add(laptop);
-                        }
-                    }
+                    resultSet = getLaptopSetByRam(laptopSet, Integer.parseInt((String) map.getValue()));
                     break;
                 case 2:
-                    for (Laptop laptop : laptopSet) {
-                        if (laptop.getHdd() >= Integer.parseInt((String) map.getValue())) {
-                            resultSet.add(laptop);
-                        }
-                    }
+                    resultSet = getLaptopSetByHdd(laptopSet, Integer.parseInt((String) map.getValue()));
                     break;
+            }
+        }
+        return resultSet;
+    }
+
+    private Set<Laptop> getLaptopSetByRam(Set<Laptop> laptopSet, int ram) {
+        Set<Laptop> resultSet = new HashSet<>();
+        for (Laptop laptop : laptopSet) {
+            if (laptop.getRam() >= ram) {
+                resultSet.add(laptop);
+            }
+        }
+        return resultSet;
+    }
+
+    private Set<Laptop> getLaptopSetByHdd(Set<Laptop> laptopSet, int hdd) {
+        Set<Laptop> resultSet = new HashSet<>();
+        for (Laptop laptop : laptopSet) {
+            if (laptop.getHdd() >= hdd) {
+                resultSet.add(laptop);
             }
         }
         return resultSet;
