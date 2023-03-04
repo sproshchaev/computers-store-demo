@@ -48,9 +48,7 @@ public class LaptopServiceImpl implements LaptopService {
     public Set<Laptop> getLaptopByCriteria(Map<Integer, String> criteria) {
         Set<Laptop> laptopSet = laptopRepository.getAllLaptop();
         Set<Laptop> resultSet = new HashSet<>();
-
         for (Map.Entry map : criteria.entrySet()) {
-
             switch ((int) map.getKey()) {
                 case 1:
                     for (Laptop laptop : laptopSet) {
